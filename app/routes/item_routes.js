@@ -29,7 +29,7 @@ const router = express.Router()
 
 // INDEX
 // GET /examples
-router.get('/item', requireToken, (req, res, next) => {
+router.get('/items', requireToken, (req, res, next) => {
   const owner = req.user.id
   Item.find({owner: owner})
     .then(items => {
@@ -58,7 +58,7 @@ router.get('/item/:id', requireToken, (req, res, next) => {
 
 // CREATE
 // POST /examples
-router.post('/item', requireToken, (req, res, next) => {
+router.post('/items', requireToken, (req, res, next) => {
   // set owner of new example to be current user
   req.body.item.owner = req.user.id
 
