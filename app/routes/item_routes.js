@@ -75,7 +75,7 @@ router.post('/items', requireToken, (req, res, next) => {
 
 // UPDATE
 // PATCH /examples/5a7db6c74d55bc51bdf39793
-router.patch('/item/:id', requireToken, removeBlanks, (req, res, next) => {
+router.patch('/items/:id', requireToken, removeBlanks, (req, res, next) => {
   // if the client attempts to change the `owner` property by including a new
   // owner, prevent that by deleting that key/value pair
   delete req.body.item.owner
@@ -98,7 +98,7 @@ router.patch('/item/:id', requireToken, removeBlanks, (req, res, next) => {
 
 // DESTROY
 // DELETE /examples/5a7db6c74d55bc51bdf39793
-router.delete('/item/:id', requireToken, (req, res, next) => {
+router.delete('/items/:id', requireToken, (req, res, next) => {
   Item.findById(req.params.id)
     .then(handle404)
     .then(item => {
