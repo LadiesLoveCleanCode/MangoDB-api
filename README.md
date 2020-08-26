@@ -54,9 +54,9 @@ DELETE | /resources/:id
 ## Images
 
 #### Wireframe:
-![wireframe](https://lucidchart.zendesk.com/hc/article_attachments/360001080866/Facebook_Wireframe_-_New_Page.png)
+[MangoDB Wireframe](https://lucidchart.zendesk.com/hc/article_attachments/360001080866/Facebook_Wireframe_-_New_Page.png)
 
 ---
 
 #### ERD:
-![ERD](https://miro.com/app/board/o9J_kmqs5VA=/)
+[MangoDB ERD](https://miro.com/app/board/o9J_kmqs5VA=/)
