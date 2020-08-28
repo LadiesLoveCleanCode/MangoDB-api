@@ -83,6 +83,7 @@ router.patch('/items/:id/update', requireToken, removeBlanks, (req, res, next) =
     .then(handle404)
     .then(item => {
       requireOwnership(req, item)
+      item.price = req.body.item.price
       item.quantity += +req.body.item.quantity
       if (item.quantity < 0) {
         return res.sendStatus(420)
