@@ -8,8 +8,8 @@ MangoDB allows users (company owners) to keep track of their inventory. Owners c
 ## Important Links
 
 - [MangoDB API Repo](https://github.com/LadiesLoveCleanCode/MangoDB-api)
-- [Deployed API](www.link.com)
-- [Deployed Client](www.link.com)
+- [Deployed API](https://ladieslovecleancode.github.io/MangoDB-api)
+- [Deployed Client](https://ladieslovecleancode.github.io/MangoDB-client)
 - [Requirements](https://docs.google.com/document/d/1Ij44LMFBSAIjLPmFbrsG6fHpdGJdOW7Wzk2TF2QFczc/edit?usp=sharing)
 
 
@@ -55,8 +55,9 @@ DELETE | /items/:id
 
 ### Unsolved Problems
 
-- Still need to ....
-- Would like to eventually ....
+- Add category routes to display inventory based on grouped categories
+- Add an update button that routes to manage your inventory page
+- Clickable icons to display inventory lists based on grouped categories
 
 
 ## Images
