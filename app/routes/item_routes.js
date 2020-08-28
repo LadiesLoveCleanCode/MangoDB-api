@@ -64,7 +64,13 @@ router.post('/items', requireToken, (req, res, next) => {
   Item.create(req.body.item)
     // respond to succesful `create` with status 201 and JSON of new "example"
     .then(item => {
-      res.status(201).json({ item: item.toObject() })
+      if (item.quantity < 0) {
+        item.quantity = 0
+        return res.sendStatus(420)
+      } else {
+        item.quantity = req.body.item.quantity
+        res.status(201).json({ item: item.toObject() })
+      }
     })
     // if an error occurs, pass it off to our error handler
     // the error handler needs the error message and the `res` object so that it
