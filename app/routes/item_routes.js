@@ -61,7 +61,6 @@ router.get('/items/:id', requireToken, (req, res, next) => {
 router.post('/items', requireToken, (req, res, next) => {
   // set owner of new example to be current user
   req.body.item.owner = req.user.id
-
   Item.create(req.body.item)
     // respond to succesful `create` with status 201 and JSON of new "example"
     .then(item => {
@@ -83,11 +82,13 @@ router.patch('/items/:id/update', requireToken, removeBlanks, (req, res, next) =
   Item.findById(req.params.id)
     .then(handle404)
     .then(item => {
-      // pass the `req` object and the Mongoose record to `requireOwnership`
-      // it will throw an error if the current user isn't the owner
       requireOwnership(req, item)
-      // pass the result of Mongoose's `.update` to the next `.then`
-      return item.updateOne(req.body.item)
+      item.quantity += +req.body.item.quantity
+      if (item.quantity < 0) {
+        return res.sendStatus(420)
+      } else {
+        return item.save()
+      }
     })
     // if that succeeded, return 204 and no JSON
     .then(() => res.sendStatus(204))
