@@ -55,7 +55,7 @@ DELETE | /items/:id
 
 ### Unsolved Problems
 
-In future iterations of MangoDB we would love to use clickable category icons to display a user's inventory. 
+In a future iteration of MangoDB we would love to use clickable category icons to display a user's inventory. 
 
 
 ## Images
