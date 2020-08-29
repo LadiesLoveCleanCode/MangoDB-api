@@ -55,9 +55,7 @@ DELETE | /items/:id
 
 ### Unsolved Problems
 
-- Add category routes to display inventory based on grouped categories
-- Add an update button that routes to manage your inventory page
-- Clickable icons to display inventory lists based on grouped categories
+In future iterations of MangoDB we would love to use clickable category icons to display a user's inventory. 
 
 
 ## Images
