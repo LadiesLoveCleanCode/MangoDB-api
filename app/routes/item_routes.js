@@ -62,21 +62,36 @@ router.get('/items/:id', requireToken, (req, res, next) => {
 router.post('/items', requireToken, (req, res, next) => {
   // set owner of new example to be current user
   req.body.item.owner = req.user.id
-  Item.create(req.body.item)
-    // respond to succesful `create` with status 201 and JSON of new "example"
-    .then(item => {
-      if (item.quantity < 0) {
-        item.quantity = 0
-        return res.sendStatus(420)
-      } else {
-        item.quantity = req.body.item.quantity
-        res.status(201).json({ item: item.toObject() })
-      }
-    })
-    // if an error occurs, pass it off to our error handler
-    // the error handler needs the error message and the `res` object so that it
-    // can send an error message back to the client
-    .catch(next)
+  if (req.body.item.quantity < 0) {
+    return res.sendStatus(420)
+  } else {
+    Item.create(req.body.item)
+      .then(item => {
+        if (req.body.item.quantity < 0) {
+          // item.quantity = 0
+          return res.sendStatus(420)
+        } else {
+          item.quantity = req.body.item.quantity
+          res.status(201).json({ item: item.toObject() })
+        }
+      })
+      .catch(next)
+  }
+  // Item.create(req.body.item)
+  // respond to succesful `create` with status 201 and JSON of new "example"
+  // .then(item => {
+  //     if (req.body.item.quantity < 0) {
+  //       // item.quantity = 0
+  //       return res.sendStatus(420)
+  //     } else {
+  //       item.quantity = req.body.item.quantity
+  //       res.status(201).json({ item: item.toObject() })
+  //     }
+  //   })
+  // if an error occurs, pass it off to our error handler
+  // the error handler needs the error message and the `res` object so that it
+  // can send an error message back to the client
+  // .catch(next)
 })
 
 // UPDATE
