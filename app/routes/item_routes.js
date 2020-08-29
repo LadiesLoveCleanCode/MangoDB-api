@@ -62,7 +62,7 @@ router.get('/items/:id', requireToken, (req, res, next) => {
 router.post('/items', requireToken, (req, res, next) => {
   // set owner of new example to be current user
   req.body.item.owner = req.user.id
-  if (req.body.item.quantity < 0) {
+  if (req.body.item.quantity < 0 || req.body.item.price < 0) {
     return res.sendStatus(420)
   } else {
     Item.create(req.body.item)
@@ -107,7 +107,7 @@ router.patch('/items/:id/update', requireToken, removeBlanks, (req, res, next) =
       requireOwnership(req, item)
       item.price = req.body.item.price
       item.quantity += +req.body.item.quantity
-      if (item.quantity < 0) {
+      if (item.quantity < 0 || item.price < 0) {
         return res.sendStatus(420)
       } else {
         return item.save()
