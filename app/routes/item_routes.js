@@ -32,6 +32,7 @@ const router = express.Router()
 router.get('/items', requireToken, (req, res, next) => {
   const owner = req.user.id
   Item.find({owner: owner})
+    .sort('product')
     .then(items => {
       // `examples` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
@@ -61,15 +62,36 @@ router.get('/items/:id', requireToken, (req, res, next) => {
 router.post('/items', requireToken, (req, res, next) => {
   // set owner of new example to be current user
   req.body.item.owner = req.user.id
-  Item.create(req.body.item)
-    // respond to succesful `create` with status 201 and JSON of new "example"
-    .then(item => {
-      res.status(201).json({ item: item.toObject() })
-    })
-    // if an error occurs, pass it off to our error handler
-    // the error handler needs the error message and the `res` object so that it
-    // can send an error message back to the client
-    .catch(next)
+  if (req.body.item.quantity < 0 || req.body.item.price < 0) {
+    return res.sendStatus(420)
+  } else {
+    Item.create(req.body.item)
+      .then(item => {
+        if (req.body.item.quantity < 0) {
+          // item.quantity = 0
+          return res.sendStatus(420)
+        } else {
+          item.quantity = req.body.item.quantity
+          res.status(201).json({ item: item.toObject() })
+        }
+      })
+      .catch(next)
+  }
+  // Item.create(req.body.item)
+  // respond to succesful `create` with status 201 and JSON of new "example"
+  // .then(item => {
+  //     if (req.body.item.quantity < 0) {
+  //       // item.quantity = 0
+  //       return res.sendStatus(420)
+  //     } else {
+  //       item.quantity = req.body.item.quantity
+  //       res.status(201).json({ item: item.toObject() })
+  //     }
+  //   })
+  // if an error occurs, pass it off to our error handler
+  // the error handler needs the error message and the `res` object so that it
+  // can send an error message back to the client
+  // .catch(next)
 })
 
 // UPDATE
@@ -83,8 +105,9 @@ router.patch('/items/:id/update', requireToken, removeBlanks, (req, res, next) =
     .then(handle404)
     .then(item => {
       requireOwnership(req, item)
+      item.price = req.body.item.price
       item.quantity += +req.body.item.quantity
-      if (item.quantity < 0) {
+      if (item.quantity < 0 || item.price < 0) {
         return res.sendStatus(420)
       } else {
         return item.save()
