@@ -44,18 +44,28 @@ Our first step was to set up the back end API and make sure we were able to CRUD
 
 ### Catalog of Routes
 
+Authentication:
+Verb         |	URI Pattern  | URI Pattern
+------------ | ------------- | -------------
+POST | /sign-up user#signup
+POST | /sign-in user#signup
+PATCH | /change-password user#changepw
+DELETE | /sign-out/
+
+
+Items:
 Verb         |	URI Pattern
 ------------ | -------------
 GET | /items
 GET | /items/:id
-POST | /items
+POST | /items-create
 PATCH | /items/:id
 DELETE | /items/:id
 
 
 ### Unsolved Problems
 
-In a future iteration of MangoDB we would love to use clickable category icons to display a user's inventory. 
+In a future iteration of MangoDB we would love to use clickable category icons to display a user's inventory.
 
 
 ## Images
