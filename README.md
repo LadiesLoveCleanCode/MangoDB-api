@@ -47,9 +47,9 @@ Our first step was to set up the back end API and make sure we were able to CRUD
 Authentication:
 Verb         |	URI Pattern  | URI Pattern
 ------------ | ------------- | -------------
-POST | /sign-up user#signup
-POST | /sign-in user#signup
-PATCH | /change-password user#changepw
+POST | /sign-up | user#signup
+POST | /sign-in | user#signup
+PATCH | /change-password | user#changepw
 DELETE | /sign-out/
 
 
