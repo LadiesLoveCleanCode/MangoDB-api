@@ -40,6 +40,7 @@ Our first step was to set up the back end API and make sure we were able to CRUD
 
 - Express API
 - MongoDB
+- Mongoose
 
 
 ### Catalog of Routes
