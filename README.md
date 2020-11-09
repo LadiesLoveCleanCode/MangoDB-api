@@ -40,22 +40,43 @@ Our first step was to set up the back end API and make sure we were able to CRUD
 
 - Express API
 - MongoDB
+- Mongoose
 
 
 ### Catalog of Routes
 
+Authentication:
+Verb         |	URI Pattern  | URI Pattern
+------------ | ------------- | -------------
+POST | /sign-up | user#signup
+POST | /sign-in | user#signup
+PATCH | /change-password | user#changepw
+DELETE | /sign-out/
+
+
+Items:
 Verb         |	URI Pattern
 ------------ | -------------
 GET | /items
 GET | /items/:id
-POST | /items
+POST | /items-create
 PATCH | /items/:id
 DELETE | /items/:id
 
 
 ### Unsolved Problems
 
+<<<<<<< HEAD
 In a future iteration of MangoDB we would love to use clickable category icons to display a user's inventory.
+=======
+In future iterations of MangoDB:
+- We will add clickable category icons to display a user's inventory based on the type of item (ex: fruits, vegetables, etc.).
+- We will add expiration dates to users' inventory items.
+- We would like the inventory list to have a scrolling feature.
+- We would like to add case sensitivity to items added to a user's inventory.
+- We would like to add functionality to allow a user to decrease an item's quantity without needing to use a - (ex: -2)
+- We would like to create a username feature that will display on the nav bar when the user logs in, instead of the user's email.
+>>>>>>> 02f4701e88704c9684a6c031ea5e2f71bf18f086
 
 
 ## Images
